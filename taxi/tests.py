@@ -13,9 +13,12 @@ class SearchTests(TestCase):
         self.client.login(username="testmate", password="1234")
 
         # filling database with test data
-        self.car = Car.objects.create(model="test_car", manufacturer=self.manufacturer)
-        self.driver = Driver.objects.create(username="test_driver", license_number="QWE12345")
-        self.manufacturer = Manufacturer.objects.create(name="test_manufacturer")
+        self.manufacturer = Manufacturer.objects.create(
+            name="test_manufacturer")
+        self.car = Car.objects.create(
+            model="test_car", manufacturer=self.manufacturer)
+        self.driver = Driver.objects.create(
+            username="test_driver", license_number="QWE12345")
 
     def test_search_cars(self):
         response = self.client.get(reverse("taxi:search-cars"), {"q": "car"})
